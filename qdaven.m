@@ -25,8 +25,3 @@ K = [B + B' - trace(B)*eye(3) Z;Z' trace(B)];
 
 q_dav = eigvec(:,idx)/norm(eigvec(:,idx));
 Q_dav = quat2Q(q_dav);
-
-% Generate Rotation Error
-%Q_error = Q_true'*Q_dav;
-%e = unhat(logm(Q_error));
-%th_e = 180/pi*norm(e)
