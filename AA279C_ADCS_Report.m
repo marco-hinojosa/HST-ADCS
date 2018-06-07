@@ -476,7 +476,7 @@ x0 = [phi0; om0; r_eci; v_eci];
 % Compute LQR Gains about Linearized Dynamics
 A = [zeros(3) eye(3); zeros(3) zeros(3)];
 B = [zeros(3); -inv(J)];
-Q = (1/(pi/3)^2)*eye(6); R = eye(size(B,2)); % Q is Tuned Based on Assumed Initial Error
+Q = (1/(pi/18)^2)*eye(6); R = diag([0.8 0.8 0.8].^-2); % Q is Tuned Based on Assumed Initial Error
 [K,~,~] = lqr(A,B,Q,R);
 
 % Initial Noisy Measurements
