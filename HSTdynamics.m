@@ -66,7 +66,7 @@ elseif length(init_state) == 13 % All States
     M = 11100; % HST Mass, [kg]
     
     % Matrix Linear Equation
-    om_dot = J\(-Tau_g - Tau_D - cross(om0,J*om0 + rho));
+    om_dot = J\(Tau_g + Tau_D - cross(om0,J*om0 + rho));
     q_dot = (1/2)*qhat*[om0; 0];
     rv_dot = [zeros(3,3) eye(3,3);
         -(mu/(r^3))*eye(3,3) zeros(3,3)]*[rvec; vvec] - [zeros(3,3); eye(3,3)]*(D/M);
