@@ -206,17 +206,24 @@ x0 = [om0;q0];
 
 % ODE45 Solver for Attitude Dynamics
 dt = 0.01;
-tspan = 0:dt:60;
+tspan = 0:dt:15;
 tol = 1e-6; opts  = odeset('reltol', tol, 'abstol', tol);
 [t, x] = ode45(@(t,x)HSTdynamics(t,x,mu,J,rho,0), tspan, x0, opts);
 
 % Plot Quaternion
-om_true = x(:,1:3); q_true = x(:,4:7);
+q_true = x(:,4:7);
 figure
 subplot(4,1,1),plot(t,q_true(:,1)),ylabel('q_1'),xlabel('t'),title('HST Quaternion Dynamics')
 subplot(4,1,2),plot(t,q_true(:,2)),ylabel('q_2'),xlabel('t')
 subplot(4,1,3),plot(t,q_true(:,3)),ylabel('q_3'),xlabel('t')
 subplot(4,1,4),plot(t,q_true(:,4)),ylabel('q_4'),xlabel('t')
+
+% Plot Omega
+om_true = x(:,1:3);
+figure
+subplot(3,1,1),plot(t,om_true(:,1)),ylabel('\omega_1'),xlabel('t'),title('HST Angular Velocity')
+subplot(3,1,2),plot(t,om_true(:,2)),ylabel('\omega_2'),xlabel('t')
+subplot(3,1,3),plot(t,om_true(:,3)),ylabel('\omega_3'),xlabel('t')
 
 %% Static Attitude Estimation (Using Magnetometer + GPS)
 load('Parameters\sensor')
